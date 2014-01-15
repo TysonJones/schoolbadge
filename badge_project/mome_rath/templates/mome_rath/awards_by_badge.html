@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block pageid %}badge_awards_by_badge{% endblock %}
+
+{% comment %}
+{% block extrahead %}
+    <link rel="alternate" type="application/atom+xml"
+        title="{% trans'Recent awards' %}"
+        href="{% url 'badger.feeds.awards_by_badge' 'atom' badge.slug %}" />
+{% endblock %}
+{% endcomment %}
+
+<!-- badge_full.html is not ready to be included -->
+{% comment %}
+<h2>Badge detail for {{badge.title}}</h2>
+{% include "momerath/includes/badge_full.html" %}
+{% comment %}
+
+{% block content %}
+<section class="awards_list">
+    <h3>Awards of {{ badge }}</h3>
+    {% include "momerath/includes/awards_as_users_list.html" %}
+</section>
+{% endblock %}
+
+<!-- Tyson 15/1/14 
+this has been modelled (mostly symmetrically) about 'awards_by_user.html'
+-->

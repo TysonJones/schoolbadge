@@ -8,10 +8,12 @@ from .models import Badge, Award
 from .forms import BadgeCreateForm, BadgeEditForm
 
 
+
 class BadgeIndex(TemplateView):
     pass
 
 
+	# same a 'badge view' in wiki?
 class BadgeDetail(TemplateView):
     template_name = "mome_rath/badge_detail.html"
 
@@ -48,6 +50,8 @@ class BadgeEdit(UpdateView):
 #    success_url = reverse('mome_rath.index')
 
 
+# is this the same as 'Awards view': /user/<username>?
+# Shows just the badges a user has earned. Include progresses and nominations? (according to wiki)
 class AwardsByUser(TemplateView):
     template_name = "mome_rath/awards_by_user.html"
 
@@ -64,6 +68,21 @@ class AwardDetail(TemplateView):
         badge = get_object_or_404(Badge, slug=slug)
         award = get_object_or_404(Award, badge=badge, pk=id)
         return render(request, self.template_name, {"badge": badge, "award": award})
+		
+''' untested views from Tyson (troubles simulating server) 15/1/2014 '''
+class AwardsByBadge(TemplateView):
+	
+	# renamed/edited from 'momerath/awards_list.html'
+    template_name = "mome_rath/awards_by_badge.html"
+		 
+	# assumes all awards are visible to all users
+	# in urls.py, this requires login (since AwardDetail does)
+	def get(self, request, slug):
+	    badge = get_object_or_404(Badge, slug=slug)
+		awards = Award.objects.filter(badge=badge)
+		return render(request, self.template_name, {"badge": badge, "award_list": awards})
+		 
+''' end of untested views from Tyson '''
 
 
 #class AwardBadge()

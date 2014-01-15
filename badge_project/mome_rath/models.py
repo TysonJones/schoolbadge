@@ -266,4 +266,10 @@ class Award(models.Model):
         u = self.user.username
         return ("award/%s/%s/%s" % (u[0], u[1], u), self.badge.slug)
 
+"""
+I've assumed (in '/include/awards_as_users_list.html', that user objects have a 'name' attribute
+and an 'image' (with field 'url') attribute.
+
+Tyson 15/1/2014
+"""
 

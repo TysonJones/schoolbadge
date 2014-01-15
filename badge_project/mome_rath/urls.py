@@ -17,7 +17,12 @@ urlpatterns = patterns('',
     url(r'^user/(?P<username>[^/]+)/?$', login_required(views.AwardsByUser.as_view()), name='mome_rath.awards_by_user'),
     url(r'^badge/(?P<slug>[^/]+)/awards/(?P<id>\d+)/?$',
         login_required(views.AwardDetail.as_view()), name='mome_rath.award_detail'),
+		
+	# added by Tyson, 15/1/2014 (I haff no idea what I'm doing) - assuming 'awards' is an appropriate page under 'badge' (not vice versa)
+	url(r'^badge/(?P<slug>[^/]+)/awards/?$',
+	    login_required(views.AwardsByBadge.as_view()), name = 'mome_rath.awards_by_badge')
     )
+	
 
 '''
     url(r'^$', 'badges_list', name='badger.badges_list'),

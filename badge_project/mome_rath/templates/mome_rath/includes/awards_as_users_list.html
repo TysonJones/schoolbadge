@@ -1,0 +1,18 @@
+{# {% load badger_tags %} #}
+
+<!-- class name is assumed and retarded -->
+<ul class="users clearfix">
+    {% for award in award_list %}
+	
+        <!-- behold wild assumptions about user model (that .name and .image.url exist), assumed 15/1/14 -->
+        <li class="user">
+            <a href="{{ award.get_absolute_url }}" class="image"><img src="{{ award.user.image.url }}"
+                alt="{{ award.user.name }}" width="128" height="128" /></a>
+            <a href="{{ award.get_absolute_url }}" class="label">
+                <span class="title">{{ award.user.name }}</span></a>
+        </li>
+    {% endfor %}
+</ul>
+{% include "mome_rath/includes/pagination.html" %}
+
+<!-- Tyson 15/1/14 -->
