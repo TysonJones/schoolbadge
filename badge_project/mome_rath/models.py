@@ -230,7 +230,8 @@ class Badge(models.Model):
 
 
 class AwardManager(models.Manager):
-    pass
+    def __init__(self):
+	    models.Manager.__init__()
 
 
 class Award(models.Model):
@@ -263,13 +264,15 @@ class Award(models.Model):
         return reverse('mome_rath.award_detail', kwargs={'slug': self.badge.slug, 'id': self.pk})
 
     def get_upload_meta(self):
-        u = self.user.username
+        u = self.user.username # reference to user attribute 'username', rather than 'name' (see bottom of file)
         return ("award/%s/%s/%s" % (u[0], u[1], u), self.badge.slug)
 
 """
-I've assumed (in '/include/awards_as_users_list.html', that user objects have a 'name' attribute
+I've assumed (in '/include/awards_as_users_list.html') that user objects have a 'name' attribute
 and an 'image' (with field 'url') attribute.
 
-Tyson 15/1/2014
+I've in assumed (in '/include/awards_list.html') that user objects have an image (with field 'url') attribute
+
+Tyson 16/1/2014
 """
 

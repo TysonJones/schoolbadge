@@ -20,7 +20,10 @@ urlpatterns = patterns('',
 		
 	# added by Tyson, 15/1/2014 (I haff no idea what I'm doing) - assuming 'awards' is an appropriate page under 'badge' (not vice versa)
 	url(r'^badge/(?P<slug>[^/]+)/awards/?$',
-	    login_required(views.AwardsByBadge.as_view()), name = 'mome_rath.awards_by_badge')
+	    login_required(views.AwardsByBadge.as_view()), name = 'mome_rath.awards_by_badge'),
+	
+	# added by Tyson, 16/1/14 - page shows 'all awards': this is possibly a bad site structure (since awards can be viewed under 'badge' or 'user' prefix)
+	url(r'^awards/?$', login_required(views.AwardsList.as_view()), name = 'mome_rath.awards_list'),
     )
 	
 

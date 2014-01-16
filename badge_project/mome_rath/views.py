@@ -71,8 +71,6 @@ class AwardDetail(TemplateView):
 		
 ''' untested views from Tyson (troubles simulating server) 15/1/2014 '''
 class AwardsByBadge(TemplateView):
-	
-	# renamed/edited from 'momerath/awards_list.html'
     template_name = "mome_rath/awards_by_badge.html"
 		 
 	# assumes all awards are visible to all users
@@ -81,7 +79,19 @@ class AwardsByBadge(TemplateView):
 	    badge = get_object_or_404(Badge, slug=slug)
 		awards = Award.objects.filter(badge=badge)
 		return render(request, self.template_name, {"badge": badge, "award_list": awards})
-		 
+		
+# displays all awards
+class AwardsList(TemplateView):
+    template_name = "mome_rath/awards_list.html"
+	
+	# assumes all awards are visible to all users
+	# in urls.py, this requires login (since AwardDetail does)
+	def get(self, request):
+	
+	    # display awards from newest created to oldest
+	    awards = Award.objects.order_by('created')
+		return render(request, self.template_name, {"award_list": awards})
+
 ''' end of untested views from Tyson '''
 
 

@@ -1,24 +1,31 @@
 {% load badger_tags %}
 
 <ul class="awards">
+
+    <!-- award_list is in order (latest to oldest) -->
     {% for award in award_list %}
  
         <li class="award">
 
-            <a href="{{ award.get_absolute_url }}" class="award_image"><img src="{% award_image award %}"
+            <a href="{{ award.get_absolute_url }}" class="award_image"><img src="{{ award.image.url }}"
                 alt="{{ award.badge.title }}" width="128" height="128" /></a>
         
             <a href="{{ award.get_absolute_url }}" class="label">
                 <span class="badge_title">{{ award.badge.title }}</span>
                 <span class="relation">awarded to</span>
                 <span class="user">{{ award.user }}</span>
+				<span class="when">at</span>
+				<span class="created">{{ award.created }}</span>
             </a>
             
-            <a href="{{ award.get_absolute_url }}" class="avatar_image"><img src="{% user_avatar award.user %}"
+			<!-- assumes User has an 'image' field (not yet modelled: 16/1/14: Tyson) -->
+            <a href="{{ award.get_absolute_url }}" class="avatar_image"><img src="{{ award.user.image.url }}"
                 alt="{{ award.badge.title }}" width="128" height="128" /></a>            
 
         </li>
 
     {% endfor %}
 </ul>
-{% include "badger/includes/pagination.html" %}
+{% include "mome_rath/includes/pagination.html" %}
+
+<!-- Tyson 16/1/14 -->
