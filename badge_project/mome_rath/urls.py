@@ -22,8 +22,11 @@ urlpatterns = patterns('',
 	url(r'^badge/(?P<slug>[^/]+)/awards/?$',
 	    login_required(views.AwardsByBadge.as_view()), name = 'mome_rath.awards_by_badge'),
 	
-	# added by Tyson, 16/1/14 - page shows 'all awards': this is possibly a bad site structure (since awards can be viewed under 'badge' or 'user' prefix)
-	url(r'^awards/?$', login_required(views.AwardsList.as_view()), name = 'mome_rath.awards_list'),
+	# added by Tyson, 16/1/14 - BAD SITE STRUCTURE? :S
+	url(r'^award/all/?$', login_required(views.AwardsList.as_view()), name = 'mome_rath.awards_list'),
+	
+	# added by Tyson, 16/1/14 - bad page name?
+	url(r'^badge/all/?$', login_required(views.BadgesList.as_view()), name = 'mome_rath.badges_list'),
     )
 	
 

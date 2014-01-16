@@ -91,6 +91,16 @@ class AwardsList(TemplateView):
 	    # display awards from newest created to oldest
 	    awards = Award.objects.order_by('created')
 		return render(request, self.template_name, {"award_list": awards})
+		
+# displays all badges
+class BadgesList(TemplateView):
+    template_name = "mome_rath/badges_list.html"
+	
+	# assumes all badges are visible to all users
+	# in urls.py, requires login
+	def get(self, request):
+	    badges = Badge.objects.all()
+		return render(request, self.template_name, {'badge_list':badges})
 
 ''' end of untested views from Tyson '''
 
