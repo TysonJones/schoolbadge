@@ -264,14 +264,14 @@ class Award(models.Model):
         return reverse('mome_rath.award_detail', kwargs={'slug': self.badge.slug, 'id': self.pk})
 
     def get_upload_meta(self):
-        u = self.user.username # reference to user attribute 'username', rather than 'name' (see bottom of file)
+        u = self.user.username
         return ("award/%s/%s/%s" % (u[0], u[1], u), self.badge.slug)
 
 """
-I've assumed (in '/include/awards_as_users_list.html') that user objects have a 'name' attribute
-and an 'image' (with field 'url') attribute.
+I've assumed (in '/include/awards_as_users_list.html' and '/include/awards_list.html')
+that user objects will have an 'image' field (with 'image.url' field)
 
-I've in assumed (in '/include/awards_list.html') that user objects have an image (with field 'url') attribute
+Also assumed that user.__unicode__() will return user's name (for display)
 
 Tyson 16/1/2014
 """
